@@ -11,9 +11,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Weather Station  ");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+        WeatherData owm = new OpenWeatherApi();
+        owm.getMaxTemperature();
+        System.out.println(" ");
+        owm.getMinTemperature();
+        System.out.println(" ");
+        owm.getHumidity();
+        System.out.println(" ");
+        owm.getWindInstance();
+        System.out.println(" ");
+
     }
 
 
