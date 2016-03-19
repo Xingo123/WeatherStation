@@ -43,7 +43,6 @@ public class JsonReader
         return cwd.getMainInstance().getPressure();
     }
 
-
     public float getTemperatureInCelcius(float temp)
     {
         temp = ((temp - 32)*5)/9;

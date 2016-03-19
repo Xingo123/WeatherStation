@@ -1,5 +1,7 @@
 package sample;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 /**
@@ -7,11 +9,11 @@ import java.io.IOException;
  */
 abstract class WeatherData
 {
-    abstract void getMaxTemperature() throws IOException;
+    abstract void getMaxTemperature() throws IOException, JSONException;
 
-    abstract void getMinTemperature() throws IOException;
+    abstract void getMinTemperature() throws IOException, JSONException;
 
-    abstract void getHumidity() throws IOException;
+    abstract void getHumidity() throws IOException, JSONException;
 
-    abstract void getWindInstance() throws IOException;
+    abstract void getWindInstance() throws IOException, JSONException;
 }
