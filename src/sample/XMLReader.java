@@ -7,7 +7,6 @@ import javax.xml.bind.JAXBException;
 import com.github.fedy2.weather.YahooWeatherService;
 import com.github.fedy2.weather.data.*;
 import com.github.fedy2.weather.data.unit.DegreeUnit;
-import com.github.fedy2.weather.data.unit.Time;
 import org.json.JSONException;
 
 /**
@@ -16,11 +15,12 @@ import org.json.JSONException;
 public class XMLReader
 {
     private YahooWeatherService service = new YahooWeatherService();
-    // 7824 Zip Code
-    private Channel channel = service.getForecast("7824", DegreeUnit.CELSIUS);
+    // 729104 = Emmen
+    private Channel channel = service.getForecast("729104", DegreeUnit.CELSIUS);
 
     public XMLReader() throws JAXBException, IOException {
         System.out.println(channel.getDescription());
+        System.out.println(channel.getItem().getDescription());
         //System.out.println(channel.getLocation());
         //System.out.println(channel.getUnits());
         //System.out.println(channel.getWind());
@@ -32,9 +32,9 @@ public class XMLReader
      *  Units:
      *  Distance, pressure, speed, temperature
      */
-    public DegreeUnit getUnits() throws IOException, JSONException
+    public int getUnits() throws IOException, JSONException
     {
-        return channel.getUnits().getTemperature();
+        return channel.getItem().getCondition().getTemp();
     }
 
     /**
@@ -59,13 +59,8 @@ public class XMLReader
      *  Astronomy:
      *  Sunrise, sunset
      */
-    public Time getAstronomy() throws IOException, JSONException
+    public Astronomy getAstronomy() throws IOException, JSONException
     {
-        return channel.getAstronomy().getSunrise();
+        return channel.getAstronomy();
     }
-
-    /**public void getService() throws JAXBException, IOException
-    {
-
-    }*/
 }

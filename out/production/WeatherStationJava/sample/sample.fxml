@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -9,56 +11,63 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.JavaFXController">
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="Settings">
+                <Menu mnemonicParsing="false" text="Menu">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" text="Refresh" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="About">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" text="WeatherStation" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <TextField promptText="Postcode of Plaats" />
+                  <Button mnemonicParsing="false" onAction="#buttonClicked" text="Zoek" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
    </top>
-   <left>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="BOTTOM_LEFT" text="Label" />
-            <HBox prefHeight="111.0" prefWidth="44.0">
+            <HBox alignment="CENTER" spacing="50.0">
                <children>
-                  <Label alignment="BOTTOM_LEFT" text="Label">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Button mnemonicParsing="false" prefWidth="100.0" text="Temperature" />
+                  <Button mnemonicParsing="false" prefWidth="100.0" text="Humidity" />
+                  <Button mnemonicParsing="false" prefWidth="100.0" text="Wind" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="WeatherStation Design Patterns">
+                     <HBox.margin>
+                        <Insets bottom="5.0" />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
          </children>
-      </HBox>
-   </left>
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Label" />
-         </children>
-      </HBox>
-   </center>
-   <right>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Label" />
-         </children>
-      </HBox>
-   </right>
+      </VBox>
+   </bottom>
 </BorderPane>

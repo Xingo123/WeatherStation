@@ -11,10 +11,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Weather Station  ");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Weather Station");
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-        WeatherData owm = new OpenWeatherApi();
+
+        WeatherData owm = new YahooWeatherApi();
         owm.getMaxTemperature();
         System.out.println(" ");
         owm.getMinTemperature();
