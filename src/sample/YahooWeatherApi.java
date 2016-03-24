@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.json.JSONException;
 
 import javax.xml.bind.JAXBException;
@@ -13,17 +12,22 @@ public class YahooWeatherApi extends WeatherData
 {
     private XMLReader xmlReader = new XMLReader();
 
-    public YahooWeatherApi() throws JAXBException, IOException {
+    public YahooWeatherApi() throws JAXBException, IOException, JSONException
+    {
+        getMaxTemperature();
+        getMinTemperature();
+        getHumidity();
+        getWindInstance();
     }
 
     void getMaxTemperature() throws IOException, JSONException
     {
-        System.out.println(xmlReader.getUnits());
+        System.out.println(xmlReader.getTemperature());
     }
 
     void getMinTemperature() throws IOException, JSONException
     {
-        System.out.println(xmlReader.getUnits());
+        System.out.println(xmlReader.getTemperature());
     }
 
     void getHumidity() throws IOException, JSONException

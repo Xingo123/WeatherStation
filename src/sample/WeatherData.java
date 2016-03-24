@@ -2,6 +2,7 @@ package sample;
 
 import org.json.JSONException;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 /**

@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -11,6 +10,15 @@ import java.io.IOException;
 public class OpenWeatherApi extends WeatherData
 {
     private JsonReader jsonReader = new JsonReader();
+
+    public OpenWeatherApi() throws IOException, JSONException
+    {
+        getMaxTemperature();
+        getMinTemperature();
+        getHumidity();
+        getWindInstance();
+    }
+
     void getMaxTemperature() throws IOException, JSONException
     {
         System.out.println(jsonReader.getMaxTemp());

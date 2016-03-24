@@ -20,7 +20,7 @@ public class XMLReader
 
     public XMLReader() throws JAXBException, IOException {
         System.out.println(channel.getDescription());
-        System.out.println(channel.getItem().getDescription());
+        //System.out.println(channel.getItem().getDescription());
         //System.out.println(channel.getLocation());
         //System.out.println(channel.getUnits());
         //System.out.println(channel.getWind());
@@ -29,10 +29,10 @@ public class XMLReader
     }
 
     /**
-     *  Units:
-     *  Distance, pressure, speed, temperature
+     *  Temperature:
+     *  item > condition > temp
      */
-    public int getUnits() throws IOException, JSONException
+    public int getTemperature() throws IOException, JSONException
     {
         return channel.getItem().getCondition().getTemp();
     }
