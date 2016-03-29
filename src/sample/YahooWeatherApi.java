@@ -14,10 +14,7 @@ public class YahooWeatherApi extends WeatherData
 
     public YahooWeatherApi() throws JAXBException, IOException, JSONException
     {
-        getMaxTemperature();
-        getMinTemperature();
-        getHumidity();
-        getWindInstance();
+
     }
 
     void getMaxTemperature() throws IOException, JSONException
@@ -38,5 +35,10 @@ public class YahooWeatherApi extends WeatherData
     void getWindInstance() throws IOException, JSONException
     {
         System.out.println(xmlReader.getWind());
+    }
+
+    void getWeatherDescription() throws JSONException
+    {
+        System.out.println(xmlReader.getDescription());
     }
 }

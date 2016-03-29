@@ -10,34 +10,26 @@ import org.json.JSONException;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application
+{
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception
+    {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Weather Station");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+        YahooParser owm = new YahooParser();
 
-        setYahooWeather();
-        System.out.println(" ");
-        setOpenWeather();
+        System.out.println(owm.getString());
+
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 
-    public WeatherData setYahooWeather() throws JSONException, JAXBException, IOException
-    {
-        Observer yahooApi = new Observer();
-        return yahooApi.yahooApiWeather();
-    }
-
-    public WeatherData setOpenWeather() throws IOException, JSONException
-    {
-        Observer openWeatherApi = new Observer();
-        return openWeatherApi.openWeatherApi();
-    }
 
 }

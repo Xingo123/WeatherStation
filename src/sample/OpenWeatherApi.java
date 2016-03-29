@@ -11,14 +11,6 @@ public class OpenWeatherApi extends WeatherData
 {
     private JsonReader jsonReader = new JsonReader();
 
-    public OpenWeatherApi() throws IOException, JSONException
-    {
-        getMaxTemperature();
-        getMinTemperature();
-        getHumidity();
-        getWindInstance();
-    }
-
     void getMaxTemperature() throws IOException, JSONException
     {
         System.out.println(jsonReader.getMaxTemp());
@@ -37,5 +29,10 @@ public class OpenWeatherApi extends WeatherData
     void getWindInstance() throws IOException, JSONException
     {
         System.out.println(jsonReader.getWindInstance());
+    }
+
+    void getWeatherDescription() throws IOException, JSONException
+    {
+        System.out.println(jsonReader.getDescription());
     }
 }

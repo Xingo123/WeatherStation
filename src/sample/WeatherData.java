@@ -17,4 +17,6 @@ abstract class WeatherData
     abstract void getHumidity() throws IOException, JSONException;
 
     abstract void getWindInstance() throws IOException, JSONException;
+
+    abstract void getWeatherDescription() throws IOException;
 }

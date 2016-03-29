@@ -18,7 +18,8 @@ public class XMLReader
     // 729104 = Emmen
     private Channel channel = service.getForecast("729104", DegreeUnit.CELSIUS);
 
-    public XMLReader() throws JAXBException, IOException {
+    public XMLReader() throws JAXBException, IOException
+    {
         System.out.println(channel.getDescription());
         //System.out.println(channel.getItem().getDescription());
         //System.out.println(channel.getLocation());
@@ -29,17 +30,18 @@ public class XMLReader
     }
 
     /**
-     *  Temperature:
-     *  item > condition > temp
+     * Temperature:
+     * item > condition > temp
      */
     public int getTemperature() throws IOException, JSONException
     {
         return channel.getItem().getCondition().getTemp();
+
     }
 
     /**
-     *  Atmosphere:
-     *  Humidity, pressure, rising, visibility
+     * Atmosphere:
+     * Humidity, pressure, rising, visibility
      */
     public Integer getAtmosphere() throws IOException, JSONException
     {
@@ -47,20 +49,26 @@ public class XMLReader
     }
 
     /**
-     *  Wind:
-     *  Chill, direction, speed
+     * Wind:
+     * Chill, direction, speed
      */
-    public Integer getWind() throws IOException, JSONException
+    public Integer getWind()
     {
         return channel.getWind().getDirection();
     }
 
     /**
-     *  Astronomy:
-     *  Sunrise, sunset
+     * Astronomy:
+     * Sunrise, sunset
      */
-    public Astronomy getAstronomy() throws IOException, JSONException
+    public Astronomy getAstronomy()
     {
         return channel.getAstronomy();
     }
+
+    public String getDescription()
+    {
+        return channel.getDescription();
+    }
+
 }

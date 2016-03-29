@@ -2,8 +2,11 @@ package sample;
 
 import net.aksingh.owmjapis.CurrentWeather;
 import net.aksingh.owmjapis.OpenWeatherMap;
+
 import java.io.IOException;
+
 import org.json.JSONException;
+
 import java.net.MalformedURLException;
 
 /**
@@ -45,8 +48,15 @@ public class JsonReader
 
     public float getTemperatureInCelcius(float temp)
     {
-        temp = ((temp - 32)*5)/9;
+        temp = ((temp - 32) * 5) / 9;
 
         return temp;
+    }
+
+    public String getDescription() throws IOException, JSONException
+    {
+        CurrentWeather cwd = owm.currentWeatherByCityName(city);
+
+        return cwd.getWeatherInstance(0).getWeatherName();
     }
 }

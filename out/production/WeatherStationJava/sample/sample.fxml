@@ -32,8 +32,7 @@
             </MenuBar>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <TextField fx:id="test" promptText="Postcode of Plaats" />
-                  <Button fx:id="button1" mnemonicParsing="false" onAction="#setYahooWeatherApi" text="Zoek" />
+                  <TextField promptText="Postcode of Plaats" />
                </children>
                <opaqueInsets>
                   <Insets />
