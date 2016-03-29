@@ -3,72 +3,74 @@ package sample;
 import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-import com.github.fedy2.weather.YahooWeatherService;
-import com.github.fedy2.weather.data.*;
-import com.github.fedy2.weather.data.unit.DegreeUnit;
 import org.json.JSONException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * Created by Xing on 19-3-2016.
  */
 public class XMLReader
 {
-    private YahooWeatherService service = new YahooWeatherService();
-    // 729104 = Emmen
-    private Channel channel = service.getForecast("729104", DegreeUnit.CELSIUS);
+    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    // Emmen
+    Document doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
 
-    public XMLReader() throws JAXBException, IOException
+
+    public XMLReader() throws JAXBException, IOException, ParserConfigurationException, SAXException { }
+
+    /**
+     *  Temperature
+     */
+    public Integer getTemperature() throws IOException, JSONException
     {
-        System.out.println(channel.getDescription());
-        //System.out.println(channel.getItem().getDescription());
-        //System.out.println(channel.getLocation());
-        //System.out.println(channel.getUnits());
-        //System.out.println(channel.getWind());
-        //System.out.println(channel.getAtmosphere());
-        //System.out.println(channel.getAstronomy());
+        NodeList nList = doc.getElementsByTagName("yweather:condition");
+        Node nNode = nList.item(0);
+        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+
+        return Integer.parseInt(element.getAttribute("temp"));
     }
 
     /**
-     * Temperature:
-     * item > condition > temp
+     *  Humidity
      */
-    public int getTemperature() throws IOException, JSONException
+    public Integer getHumidity() throws IOException, JSONException
     {
-        return channel.getItem().getCondition().getTemp();
+        NodeList nList = doc.getElementsByTagName("yweather:atmosphere");
+        Node nNode = nList.item(0);
+        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
 
+        return Integer.parseInt(element.getAttribute("humidity"));
     }
 
     /**
-     * Atmosphere:
-     * Humidity, pressure, rising, visibility
+     *  Wind
      */
-    public Integer getAtmosphere() throws IOException, JSONException
+    public Integer getWind() throws IOException, JSONException
     {
-        return channel.getAtmosphere().getHumidity();
+        NodeList nList = doc.getElementsByTagName("yweather:wind");
+        Node nNode = nList.item(0);
+        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+
+        return Integer.parseInt(element.getAttribute("speed"));
     }
 
     /**
-     * Wind:
-     * Chill, direction, speed
+     *  Description
      */
-    public Integer getWind()
+    public String getDescription() throws IOException, JSONException
     {
-        return channel.getWind().getDirection();
-    }
+        NodeList nList = doc.getElementsByTagName("yweather:condition");
+        Node nNode = nList.item(0);
+        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
 
-    /**
-     * Astronomy:
-     * Sunrise, sunset
-     */
-    public Astronomy getAstronomy()
-    {
-        return channel.getAstronomy();
+        return element.getAttribute("text");
     }
-
-    public String getDescription()
-    {
-        return channel.getDescription();
-    }
-
 }

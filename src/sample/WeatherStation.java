@@ -1,8 +1,10 @@
 package sample;
 
 import org.json.JSONException;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
@@ -10,7 +12,7 @@ import java.io.IOException;
  */
 public class WeatherStation
 {
-    public WeatherData yahooApiWeather() throws JAXBException, IOException
+    public WeatherData yahooApiWeather() throws JAXBException, IOException, ParserConfigurationException, SAXException, JSONException
     {
         WeatherData yahooApi = new YahooWeatherApi();
 
@@ -27,11 +29,11 @@ public class WeatherStation
     // When 'Zoek' is pressed on the GUI | For testing purposes
     public void setYahooWeatherApi() throws JAXBException, IOException
     {
-        yahooApiWeather();
+        //yahooApiWeather();
     }
 
     public void setOpenWeatherApi() throws IOException, JSONException
     {
-        openWeatherApi();
+        //openWeatherApi();
     }
 }

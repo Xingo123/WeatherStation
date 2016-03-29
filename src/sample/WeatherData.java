@@ -18,5 +18,5 @@ abstract class WeatherData
 
     abstract void getWindInstance() throws IOException, JSONException;
 
-    abstract void getWeatherDescription() throws IOException;
+    abstract void getWeatherDescription() throws IOException, JSONException;
 }
