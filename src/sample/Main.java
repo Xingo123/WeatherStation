@@ -23,10 +23,11 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
-        WeatherStation weatherStation = new WeatherStation();
+        WeatherData yahooApi = new YahooWeatherApi();
+        yahooApi.getMinTemperature();
 
-        weatherStation.getYahooWeatherApi().getMinTemperature();
-        //weatherStation.getOpenWeatherApi().getMinTemperature();
+        System.out.println(" ");
+
 //        WeatherData owm = new OpenWeatherApi();
 //        owm.getMinTemperature();
 
