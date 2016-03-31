@@ -13,24 +13,27 @@ import java.io.IOException;
  */
 public class WeatherStation
 {
+    //Fields Weatherstation class
     private WeatherData yahooApi;
     private WeatherData openWeatherApi;
 
+    /*
+        Constructor of Weather station
+        Where the WeatherData class uses his child classes
+     */
     public WeatherStation() throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
     {
         yahooApi = new YahooWeatherApi();
         openWeatherApi = new OpenWeatherApi();
-
     }
 
-    // When 'Zoek' is pressed on the GUI | For testing purposes
-    public void setYahooWeatherApi() throws JAXBException, IOException
+    public WeatherData getYahooWeatherApi()
     {
-        //yahooApiWeather();
+        return yahooApi;
     }
 
-    public void setOpenWeatherApi() throws IOException, JSONException
+    public WeatherData getOpenWeatherApi()
     {
-        //openWeatherApi();
+        return openWeatherApi;
     }
 }

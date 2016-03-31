@@ -31,7 +31,7 @@ public class XMLReader
     /**
      *  Temperature
      */
-    protected Integer getTemperature() throws IOException, JSONException
+    public Integer getTemperature() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);
@@ -43,7 +43,7 @@ public class XMLReader
     /**
      *  Humidity
      */
-    protected Integer getHumidity() throws IOException, JSONException
+    public Integer getHumidity() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:atmosphere");
         Node nNode = nList.item(0);
@@ -55,7 +55,7 @@ public class XMLReader
     /**
      *  Wind
      */
-    protected Integer getWind() throws IOException, JSONException
+    public Integer getWind() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:wind");
         Node nNode = nList.item(0);
@@ -67,7 +67,7 @@ public class XMLReader
     /**
      *  Description
      */
-    protected String getDescription() throws IOException, JSONException
+    public String getDescription() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);

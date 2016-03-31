@@ -18,42 +18,42 @@ public class JsonReader
     // getting current weather data for the "Coevorden" city
     private String city = "Coevorden";
 
-    protected float getMaxTemp() throws IOException, JSONException
+    public float getMaxTemp() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return getTemperatureInCelcius(cwd.getMainInstance().getMaxTemperature());
     }
 
-    protected float getMinTemp() throws IOException, JSONException
+    public float getMinTemp() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return getTemperatureInCelcius(cwd.getMainInstance().getMinTemperature());
     }
 
-    protected float getHumidity() throws IOException, JSONException
+    public float getHumidity() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return cwd.getMainInstance().getHumidity();
     }
 
-    protected float getWindInstance() throws IOException, JSONException
+    public float getWindInstance() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return cwd.getMainInstance().getPressure();
     }
 
-    protected float getTemperatureInCelcius(float temp)
+    public float getTemperatureInCelcius(float temp)
     {
         temp = ((temp - 32) * 5) / 9;
 
         return temp;
     }
 
-    protected String getDescription() throws IOException, JSONException
+    public String getDescription() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
