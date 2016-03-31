@@ -14,13 +14,9 @@ public class YahooWeatherApi extends WeatherData
 {
     private XMLReader xmlReader = new XMLReader();
 
+
     public YahooWeatherApi() throws JAXBException, IOException, JSONException, ParserConfigurationException, SAXException
     {
-        getMaxTemperature();
-        getMinTemperature();
-        getHumidity();
-        getWindInstance();
-        getWeatherDescription();
     }
 
     void getMaxTemperature() throws IOException, JSONException

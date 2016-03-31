@@ -18,18 +18,20 @@ import org.xml.sax.SAXException;
  */
 public class XMLReader
 {
-    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-    // Emmen
-    Document doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
+    private DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    private DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    private Document doc;
 
 
-    public XMLReader() throws JAXBException, IOException, ParserConfigurationException, SAXException { }
+    public XMLReader() throws JAXBException, IOException, ParserConfigurationException, SAXException
+    {
+        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
+    }
 
     /**
      *  Temperature
      */
-    public Integer getTemperature() throws IOException, JSONException
+    protected Integer getTemperature() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);
@@ -41,7 +43,7 @@ public class XMLReader
     /**
      *  Humidity
      */
-    public Integer getHumidity() throws IOException, JSONException
+    protected Integer getHumidity() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:atmosphere");
         Node nNode = nList.item(0);
@@ -53,7 +55,7 @@ public class XMLReader
     /**
      *  Wind
      */
-    public Integer getWind() throws IOException, JSONException
+    protected Integer getWind() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:wind");
         Node nNode = nList.item(0);
@@ -65,7 +67,7 @@ public class XMLReader
     /**
      *  Description
      */
-    public String getDescription() throws IOException, JSONException
+    protected String getDescription() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);

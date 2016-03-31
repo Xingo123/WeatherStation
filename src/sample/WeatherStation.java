@@ -1,5 +1,6 @@
 package sample;
 
+import net.aksingh.owmjapis.AbstractWeather;
 import org.json.JSONException;
 import org.xml.sax.SAXException;
 
@@ -12,18 +13,14 @@ import java.io.IOException;
  */
 public class WeatherStation
 {
-    public WeatherData yahooApiWeather() throws JAXBException, IOException, ParserConfigurationException, SAXException, JSONException
+    private WeatherData yahooApi;
+    private WeatherData openWeatherApi;
+
+    public WeatherStation() throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
     {
-        WeatherData yahooApi = new YahooWeatherApi();
+        yahooApi = new YahooWeatherApi();
+        openWeatherApi = new OpenWeatherApi();
 
-        return yahooApi;
-    }
-
-    public WeatherData openWeatherApi() throws IOException, JSONException
-    {
-        WeatherData openWeatherApi = new OpenWeatherApi();
-
-        return openWeatherApi;
     }
 
     // When 'Zoek' is pressed on the GUI | For testing purposes

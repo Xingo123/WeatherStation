@@ -23,9 +23,13 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
-        setYahooWeather();
+        WeatherData yahooApi = new YahooWeatherApi();
+        yahooApi.getMinTemperature();
+
         System.out.println(" ");
-        setOpenWeather();
+
+//        WeatherData owm = new OpenWeatherApi();
+//        owm.getMinTemperature();
 
     }
 
@@ -33,18 +37,4 @@ public class Main extends Application
     {
         launch(args);
     }
-
-    public WeatherData setYahooWeather() throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
-    {
-        WeatherStation yahooApi = new WeatherStation();
-        return yahooApi.yahooApiWeather();
-    }
-
-    public WeatherData setOpenWeather() throws IOException, JSONException
-    {
-        WeatherStation openWeatherApi = new WeatherStation();
-        return openWeatherApi.openWeatherApi();
-    }
-
-
 }
