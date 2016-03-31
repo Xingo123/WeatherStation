@@ -12,34 +12,42 @@ import java.io.IOException;
  */
 public class YahooWeatherApi extends WeatherData
 {
-    private XMLReader xmlReader = new XMLReader();
+    /*
+        Fields of YahooWeatherApi
+        That uses an XMLReader object to read data
+     */
+    private XMLReader xmlReader;
 
-
-    public YahooWeatherApi() throws JAXBException, IOException, JSONException, ParserConfigurationException, SAXException
+    /*
+        Constructor of XMLReader
+        Creating a new object XMLReader
+     */
+    public YahooWeatherApi() throws JAXBException, IOException, ParserConfigurationException, SAXException
     {
+        xmlReader = new XMLReader();
     }
 
-    void getMaxTemperature() throws IOException, JSONException
+    void getMaxTemperature() throws IOException
     {
         System.out.println("Max Temp: " + xmlReader.getTemperature());
     }
 
-    void getMinTemperature() throws IOException, JSONException
+    void getMinTemperature() throws IOException
     {
         System.out.println("Min Temp: " + xmlReader.getTemperature());
     }
 
-    void getHumidity() throws IOException, JSONException
+    void getHumidity() throws IOException
     {
         System.out.println("Humidity: " + xmlReader.getHumidity());
     }
 
-    void getWindInstance() throws IOException, JSONException
+    void getWindInstance() throws IOException
     {
         System.out.println("Wind speed: " + xmlReader.getWind());
     }
 
-    void getWeatherDescription() throws IOException, JSONException
+    void getWeatherDescription() throws IOException
     {
         System.out.println("Description: " + xmlReader.getDescription());
     }

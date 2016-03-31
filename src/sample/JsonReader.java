@@ -18,42 +18,60 @@ public class JsonReader
     // getting current weather data for the "Coevorden" city
     private String city = "Coevorden";
 
-    protected float getMaxTemp() throws IOException, JSONException
+    /*
+        Getting maximum Temperature of the day
+     */
+    public float getMaxTemp() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return getTemperatureInCelcius(cwd.getMainInstance().getMaxTemperature());
     }
 
-    protected float getMinTemp() throws IOException, JSONException
+    /*
+        Getting minimum Temperature of the day
+     */
+    public float getMinTemp() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return getTemperatureInCelcius(cwd.getMainInstance().getMinTemperature());
     }
 
-    protected float getHumidity() throws IOException, JSONException
+    /*
+        Getting humidity of the day
+     */
+    public float getHumidity() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return cwd.getMainInstance().getHumidity();
     }
 
-    protected float getWindInstance() throws IOException, JSONException
+    /*
+        Getting wind instance of the day
+     */
+    public float getWindInstance() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return cwd.getMainInstance().getPressure();
     }
 
-    protected float getTemperatureInCelcius(float temp)
+    /*
+        Convert Fahrenheit temperature to Celcius
+     */
+    public float getTemperatureInCelcius(float temp)
     {
         temp = ((temp - 32) * 5) / 9;
 
         return temp;
     }
 
-    protected String getDescription() throws IOException, JSONException
+    /*
+        Getting the main description of the current moment
+     */
+    public String getDescription() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 

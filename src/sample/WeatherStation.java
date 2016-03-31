@@ -13,24 +13,36 @@ import java.io.IOException;
  */
 public class WeatherStation
 {
+    /*
+        Fields of WheaterStation
+        All fields are the type of WeatherData
+     */
     private WeatherData yahooApi;
     private WeatherData openWeatherApi;
 
+    /*
+        Constructor of WheaterStation
+        Assign an API Source to the WeatherData object
+     */
     public WeatherStation() throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
     {
         yahooApi = new YahooWeatherApi();
         openWeatherApi = new OpenWeatherApi();
-
     }
 
-    // When 'Zoek' is pressed on the GUI | For testing purposes
-    public void setYahooWeatherApi() throws JAXBException, IOException
+    /*
+        Getting the sourcedata of the object YahooWeatherApi
+     */
+    public WeatherData getYahooApi()
     {
-        //yahooApiWeather();
+        return yahooApi;
     }
 
-    public void setOpenWeatherApi() throws IOException, JSONException
+    /*
+        Getting the sourcedata of the object OpenWeatherApi
+     */
+    public WeatherData getOpenWeatherApi()
     {
-        //openWeatherApi();
+        return openWeatherApi;
     }
 }

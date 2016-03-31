@@ -18,20 +18,22 @@ import org.xml.sax.SAXException;
  */
 public class XMLReader
 {
-    private DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-    private DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    private DocumentBuilderFactory dbFactory;
+    private DocumentBuilder dBuilder;
     private Document doc;
 
 
     public XMLReader() throws JAXBException, IOException, ParserConfigurationException, SAXException
     {
+        dbFactory = DocumentBuilderFactory.newInstance();
+        dBuilder = dbFactory.newDocumentBuilder();
         doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
     }
 
     /**
      *  Temperature
      */
-    protected Integer getTemperature() throws IOException, JSONException
+    public Integer getTemperature() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);
@@ -43,7 +45,7 @@ public class XMLReader
     /**
      *  Humidity
      */
-    protected Integer getHumidity() throws IOException, JSONException
+    public Integer getHumidity() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:atmosphere");
         Node nNode = nList.item(0);
@@ -55,7 +57,7 @@ public class XMLReader
     /**
      *  Wind
      */
-    protected Integer getWind() throws IOException, JSONException
+    public Integer getWind() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:wind");
         Node nNode = nList.item(0);
@@ -67,7 +69,7 @@ public class XMLReader
     /**
      *  Description
      */
-    protected String getDescription() throws IOException, JSONException
+    public String getDescription() throws IOException, JSONException
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);
