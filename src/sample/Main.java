@@ -5,13 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.json.JSONException;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-
 public class Main extends Application
 {
 
@@ -26,6 +19,17 @@ public class Main extends Application
         WeatherStation weatherStation = new WeatherStation();
 
         weatherStation.getYahooApi().getMinTemperature();
+        weatherStation.getYahooApi().getMinTemperature();
+        weatherStation.getYahooApi().getHumidity();
+        weatherStation.getYahooApi().getWeatherDescription();
+        weatherStation.getYahooApi().getWindInstance();
+
+        weatherStation.getOpenWeatherApi().getMinTemperature();
+        weatherStation.getOpenWeatherApi().getMinTemperature();
+        weatherStation.getOpenWeatherApi().getHumidity();
+        weatherStation.getOpenWeatherApi().getWeatherDescription();
+        weatherStation.getOpenWeatherApi().getWindInstance();
+
 
     }
 
