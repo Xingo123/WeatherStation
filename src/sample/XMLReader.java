@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.json.JSONException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -22,56 +23,55 @@ public class XMLReader
     private DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     private Document doc;
 
-
-    public XMLReader() throws JAXBException, IOException, ParserConfigurationException, SAXException
+    public XMLReader() throws ParserConfigurationException, IOException, SAXException
     {
-        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
+        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Emmen%2C%20NL%22)&format=xml&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
     }
 
     /**
      *  Temperature
      */
-    protected Integer getTemperature() throws IOException, JSONException
+    protected String getTemperature()
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
-        return Integer.parseInt(element.getAttribute("temp"));
+        return element.getAttribute("temp");
     }
 
     /**
      *  Humidity
      */
-    protected Integer getHumidity() throws IOException, JSONException
+    protected String getHumidity()
     {
         NodeList nList = doc.getElementsByTagName("yweather:atmosphere");
         Node nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
-        return Integer.parseInt(element.getAttribute("humidity"));
+        return element.getAttribute("humidity");
     }
 
     /**
      *  Wind
      */
-    protected Integer getWind() throws IOException, JSONException
+    protected String getWind()
     {
-        NodeList nList = doc.getElementsByTagName("yweather:wind");
+        NodeList nList = doc.getElementsByTagName("yweather:atmosphere");
         Node nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
-        return Integer.parseInt(element.getAttribute("speed"));
+        return element.getAttribute("pressure");
     }
 
     /**
      *  Description
      */
-    protected String getDescription() throws IOException, JSONException
+    protected String getDescription()
     {
         NodeList nList = doc.getElementsByTagName("yweather:condition");
         Node nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
         return element.getAttribute("text");
     }

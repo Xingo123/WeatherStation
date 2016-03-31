@@ -13,17 +13,15 @@ import java.io.IOException;
  */
 public class WeatherStation
 {
-    private WeatherData yahooApi;
-    private WeatherData openWeatherApi;
+    public WeatherData yahooApi;
+    public WeatherData openWeatherApi;
 
-    public WeatherStation() throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
+    public WeatherStation() throws IOException, SAXException, ParserConfigurationException
     {
         yahooApi = new YahooWeatherApi();
         openWeatherApi = new OpenWeatherApi();
-
     }
 
-    // When 'Zoek' is pressed on the GUI | For testing purposes
     public void setYahooWeatherApi() throws JAXBException, IOException
     {
         //yahooApiWeather();

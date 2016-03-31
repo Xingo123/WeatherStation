@@ -24,13 +24,20 @@ public class Main extends Application
         primaryStage.show();
 
         WeatherData yahooApi = new YahooWeatherApi();
+        yahooApi.getMaxTemperature();
         yahooApi.getMinTemperature();
+        yahooApi.getHumidity();
+        yahooApi.getWindInstance();
+        yahooApi.getWeatherDescription();
 
         System.out.println(" ");
 
-//        WeatherData owm = new OpenWeatherApi();
-//        owm.getMinTemperature();
-
+        WeatherData openWeatherApi = new OpenWeatherApi();
+        openWeatherApi.getMaxTemperature();
+        openWeatherApi.getMinTemperature();
+        openWeatherApi.getHumidity();
+        openWeatherApi.getWindInstance();
+        openWeatherApi.getWeatherDescription();
     }
 
     public static void main(String[] args)

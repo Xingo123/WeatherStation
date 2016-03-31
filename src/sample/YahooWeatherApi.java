@@ -14,33 +14,32 @@ public class YahooWeatherApi extends WeatherData
 {
     private XMLReader xmlReader = new XMLReader();
 
-
-    public YahooWeatherApi() throws JAXBException, IOException, JSONException, ParserConfigurationException, SAXException
+    public YahooWeatherApi() throws ParserConfigurationException, SAXException, IOException
     {
     }
 
-    void getMaxTemperature() throws IOException, JSONException
+    void getMaxTemperature()
     {
-        System.out.println("Max Temp: " + xmlReader.getTemperature());
+        System.out.println(xmlReader.getTemperature());
     }
 
-    void getMinTemperature() throws IOException, JSONException
+    void getMinTemperature()
     {
-        System.out.println("Min Temp: " + xmlReader.getTemperature());
+        System.out.println(xmlReader.getTemperature());
     }
 
-    void getHumidity() throws IOException, JSONException
+    void getHumidity()
     {
-        System.out.println("Humidity: " + xmlReader.getHumidity());
+        System.out.println(xmlReader.getHumidity());
     }
 
-    void getWindInstance() throws IOException, JSONException
+    void getWindInstance()
     {
-        System.out.println("Wind speed: " + xmlReader.getWind());
+        System.out.println(xmlReader.getWind());
     }
 
-    void getWeatherDescription() throws IOException, JSONException
+    void getWeatherDescription()
     {
-        System.out.println("Description: " + xmlReader.getDescription());
+        System.out.println(xmlReader.getDescription());
     }
 }
