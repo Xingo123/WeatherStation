@@ -30,11 +30,10 @@ public class XMLReader
         dbFactory = DocumentBuilderFactory.newInstance();
         dBuilder = dbFactory.newDocumentBuilder();
         doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
-
     }
 
     /**
-     *  Temperature
+     * Temperature
      */
     public Integer getTemperature() throws IOException, JSONException
     {
@@ -46,7 +45,7 @@ public class XMLReader
     }
 
     /**
-     *  Humidity
+     * Humidity
      */
     public Integer getHumidity() throws IOException, JSONException
     {
@@ -58,7 +57,7 @@ public class XMLReader
     }
 
     /**
-     *  Wind
+     * Wind
      */
     public Integer getWind() throws IOException, JSONException
     {
@@ -70,7 +69,7 @@ public class XMLReader
     }
 
     /**
-     *  Description
+     * Description
      */
     public String getDescription() throws IOException, JSONException
     {

@@ -1,17 +1,17 @@
 package sample;
 
-import net.aksingh.owmjapis.AbstractWeather;
 import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Xing on 29-3-2016.
  */
-public class WeatherStation
+public class WeatherStation implements ObserverSubject
 {
     /*
         Fields of WheaterStation
@@ -19,6 +19,7 @@ public class WeatherStation
      */
     private WeatherData yahooApi;
     private WeatherData openWeatherApi;
+    private ArrayList observers;
 
     /*
         Constructor of WheaterStation
@@ -28,6 +29,7 @@ public class WeatherStation
     {
         yahooApi = new YahooWeatherApi();
         openWeatherApi = new OpenWeatherApi();
+        observers = new ArrayList();
     }
 
     /*
@@ -44,5 +46,38 @@ public class WeatherStation
     public WeatherData getOpenWeatherApi()
     {
         return openWeatherApi;
+    }
+
+    @Override
+    public void registerObserver(WeatherObserver o)
+    {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(WeatherObserver o)
+    {
+        int i = observers.indexOf(o);
+        if (i >= 0)
+        {
+            observers.remove(i);
+        }
+    }
+
+    @Override
+    public void notifyObservers() throws IOException, JSONException
+    {
+        for (int i = 0; i < observers.size(); i++)
+        {
+            WeatherObserver observer = (WeatherObserver)observers.get(i);
+            if(yahooApi.getWeatherDescription() == "")
+            {
+                observer.update(openWeatherApi.getWeatherDescription());
+            }
+            else
+            {
+                observer.update(yahooApi.getWeatherDescription());
+            }
+        }
     }
 }

@@ -2,7 +2,6 @@ package sample;
 
 import org.json.JSONException;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 /**
@@ -18,5 +17,5 @@ abstract class WeatherData
 
     abstract void getWindInstance() throws IOException, JSONException;
 
-    abstract void getWeatherDescription() throws IOException, JSONException;
+    abstract String getWeatherDescription() throws IOException, JSONException;
 }

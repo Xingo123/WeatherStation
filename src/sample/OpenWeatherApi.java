@@ -31,8 +31,8 @@ public class OpenWeatherApi extends WeatherData
         System.out.println("Wind pressure: " + jsonReader.getWindInstance());
     }
 
-    void getWeatherDescription() throws IOException, JSONException
+    String getWeatherDescription() throws IOException, JSONException
     {
-        System.out.println("Description: " + jsonReader.getDescription());
+        return jsonReader.getDescription();
     }
 }

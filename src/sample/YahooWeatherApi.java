@@ -1,6 +1,5 @@
 package sample;
 
-import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -47,8 +46,8 @@ public class YahooWeatherApi extends WeatherData
         System.out.println("Wind speed: " + xmlReader.getWind());
     }
 
-    void getWeatherDescription() throws IOException
+    String getWeatherDescription() throws IOException
     {
-        System.out.println("Description: " + xmlReader.getDescription());
+        return xmlReader.getDescription();
     }
 }
