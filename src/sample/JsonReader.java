@@ -16,7 +16,7 @@ public class JsonReader
 { // declaring object of "OpenWeatherMap" class
     private OpenWeatherMap owm = new OpenWeatherMap("0ff3dd96a6e1b885e7d66ec896b71860");
     // getting current weather data for the "Coevorden" city
-    private String city = "Coevorden";
+    private String city = setCity("Coervorden");
 
     /*
         Getting maximum Temperature of the day
@@ -76,5 +76,18 @@ public class JsonReader
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return cwd.getWeatherInstance(0).getWeatherName();
+    }
+
+    public String getCity() throws IOException, JSONException
+    {
+        CurrentWeather cwd = owm.currentWeatherByCityName(city);
+
+        return cwd.getCityName();
+    }
+
+    public String setCity(String city)
+    {
+        this.city = city;
+        return city;
     }
 }

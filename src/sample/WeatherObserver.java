@@ -5,5 +5,5 @@ package sample;
  */
 public interface WeatherObserver
 {
-    public void update(String currentWeatherDescription);
+    void update(String currentWeatherDescription);
 }

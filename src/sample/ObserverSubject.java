@@ -1,5 +1,7 @@
 package sample;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 /**
@@ -7,7 +9,7 @@ import java.io.IOException;
  */
 public interface ObserverSubject
 {
-    public void registerObserver(WeatherObserver o);
-    public void removeObserver(WeatherObserver o);
-    public void notifyObservers() throws IOException;
+    void registerObserver(WeatherObserver o);
+    void removeObserver(WeatherObserver o);
+    void notifyObservers() throws IOException, JSONException;
 }

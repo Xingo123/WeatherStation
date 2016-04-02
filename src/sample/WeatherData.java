@@ -9,13 +9,15 @@ import java.io.IOException;
  */
 abstract class WeatherData
 {
-    abstract void getMaxTemperature() throws IOException, JSONException;
+    abstract String getMaxTemperature() throws IOException, JSONException;
 
-    abstract void getMinTemperature() throws IOException, JSONException;
+    abstract String getMinTemperature() throws IOException, JSONException;
 
-    abstract void getHumidity() throws IOException, JSONException;
+    abstract String getHumidity() throws IOException, JSONException;
 
-    abstract void getWindInstance() throws IOException, JSONException;
+    abstract String getWindInstance() throws IOException, JSONException;
 
     abstract String getWeatherDescription() throws IOException, JSONException;
+
+    abstract String getCity() throws IOException, JSONException;
 }

@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.json.JSONException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -35,37 +36,37 @@ public class XMLReader
     /**
      * Temperature
      */
-    public Integer getTemperature() throws IOException, JSONException
+    public String getTemperature() throws IOException, JSONException
     {
         nList = doc.getElementsByTagName("yweather:condition");
         nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
-        return Integer.parseInt(element.getAttribute("temp"));
+        return element.getAttribute("temp");
     }
 
     /**
      * Humidity
      */
-    public Integer getHumidity() throws IOException, JSONException
+    public String getHumidity() throws IOException, JSONException
     {
         nList = doc.getElementsByTagName("yweather:atmosphere");
         nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
-        return Integer.parseInt(element.getAttribute("humidity"));
+        return element.getAttribute("humidity");
     }
 
     /**
      * Wind
      */
-    public Integer getWind() throws IOException, JSONException
+    public String getWind() throws IOException, JSONException
     {
-        nList = doc.getElementsByTagName("yweather:wind");
+        nList = doc.getElementsByTagName("yweather:atmosphere");
         nNode = nList.item(0);
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
-        return Integer.parseInt(element.getAttribute("speed"));
+        return element.getAttribute("pressure");
     }
 
     /**
@@ -75,9 +76,20 @@ public class XMLReader
     {
         nList = doc.getElementsByTagName("yweather:condition");
         nNode = nList.item(0);
-
-        org.w3c.dom.Element element = (org.w3c.dom.Element) nNode;
+        Element element = (Element) nNode;
 
         return element.getAttribute("text");
+    }
+
+    /**
+     * City
+     */
+    public String getCity() throws IOException, JSONException
+    {
+        nList = doc.getElementsByTagName("title");
+        nNode = nList.item(0);
+        Element element = (Element) nNode;
+
+        return element.getTextContent();
     }
 }

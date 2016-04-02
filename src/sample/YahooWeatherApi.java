@@ -1,5 +1,6 @@
 package sample;
 
+import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -26,28 +27,33 @@ public class YahooWeatherApi extends WeatherData
         xmlReader = new XMLReader();
     }
 
-    void getMaxTemperature() throws IOException
+    String getMaxTemperature() throws IOException, JSONException
     {
-        System.out.println("Max Temp: " + xmlReader.getTemperature());
+        return xmlReader.getTemperature();
     }
 
-    void getMinTemperature() throws IOException
+    String getMinTemperature() throws IOException, JSONException
     {
-        System.out.println("Min Temp: " + xmlReader.getTemperature());
+        return xmlReader.getTemperature();
     }
 
-    void getHumidity() throws IOException
+    String getHumidity() throws IOException, JSONException
     {
-        System.out.println("Humidity: " + xmlReader.getHumidity());
+        return xmlReader.getHumidity();
     }
 
-    void getWindInstance() throws IOException
+    String getWindInstance() throws IOException, JSONException
     {
-        System.out.println("Wind speed: " + xmlReader.getWind());
+        return xmlReader.getWind();
     }
 
-    String getWeatherDescription() throws IOException
+    String getWeatherDescription() throws IOException, JSONException
     {
         return xmlReader.getDescription();
     }
+
+   String getCity() throws IOException, JSONException
+   {
+       return xmlReader.getCity();
+   }
 }
