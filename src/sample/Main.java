@@ -5,11 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 public class Main extends Application
 {
@@ -20,24 +16,6 @@ public class Main extends Application
         primaryStage.setTitle("Weather Station");
         primaryStage.setScene(new Scene(root, 500, 399));
         primaryStage.show();
-
-        WeatherStation weatherStation = new WeatherStation();
-
-        /**
-        weatherStation.getYahooApi().getMinTemperature();
-        weatherStation.getYahooApi().getMaxTemperature();
-        weatherStation.getYahooApi().getHumidity();
-        weatherStation.getYahooApi().getWindInstance();
-        weatherStation.getYahooApi().getWeatherDescription();
-         */
-
-        //weatherStation.getYahooApi().getForecast();
-
-        //weatherStation.getOpenWeatherApi().getMinTemperature();
-        //weatherStation.getOpenWeatherApi().getMaxTemperature();
-        //weatherStation.getOpenWeatherApi().getHumidity();
-        //weatherStation.getOpenWeatherApi().getWindInstance();
-        //weatherStation.getOpenWeatherApi().getWeatherDescription();
     }
 
     public static void main(String[] args)

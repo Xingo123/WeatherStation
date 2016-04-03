@@ -17,12 +17,16 @@ import java.text.DecimalFormat;
 public class JsonReader
 { // declaring object of "OpenWeatherMap" class
     private OpenWeatherMap owm = new OpenWeatherMap("0ff3dd96a6e1b885e7d66ec896b71860");
-    DailyForecast df = owm.dailyForecastByCityName("Coevorden, NL", Byte.parseByte("5"));
+    private DailyForecast df;
 
     // getting current weather data for the "Coevorden" city
-    private String city = setCity("Coervorden");
+    private String city;
 
-    public JsonReader() throws IOException, JSONException {}
+    public JsonReader(String city) throws IOException, JSONException
+    {
+        this.city = setCity(city);
+        df = owm.dailyForecastByCityName(city + ", NL", Byte.parseByte("5"));
+    }
 
     /*
         Getting maximum Temperature of the day
@@ -110,7 +114,7 @@ public class JsonReader
     // 2 seperate methods for 2 days each. 2 seperate labels
     public String getForecast1() throws IOException, JSONException
     {
-        String forecastString = null;
+        String forecastString = "";
         for (int i = 1; i < 3; i++)
         {
             DailyForecast.Forecast forecast = df.getForecastInstance(i);
@@ -124,7 +128,7 @@ public class JsonReader
 
     public String getForecast2() throws IOException, JSONException
     {
-        String forecastString = null;
+        String forecastString = "";
         for (int i = 3; i < 5; i++)
         {
             DailyForecast.Forecast forecast = df.getForecastInstance(i);

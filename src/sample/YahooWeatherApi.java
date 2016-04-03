@@ -22,19 +22,19 @@ public class YahooWeatherApi extends WeatherData
         Constructor of XMLReader
         Creating a new object XMLReader
      */
-    public YahooWeatherApi() throws JAXBException, IOException, ParserConfigurationException, SAXException
+    public YahooWeatherApi(String city) throws JAXBException, IOException, ParserConfigurationException, SAXException
     {
-        xmlReader = new XMLReader();
+        xmlReader = new XMLReader(city);
     }
 
     String getMaxTemperature() throws IOException, JSONException
     {
-        return xmlReader.getTemperature();
+        return xmlReader.getMaxTemperature();
     }
 
     String getMinTemperature() throws IOException, JSONException
     {
-        return xmlReader.getTemperature();
+        return xmlReader.getMinTemperature();
     }
 
     String getHumidity() throws IOException, JSONException

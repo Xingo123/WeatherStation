@@ -25,10 +25,10 @@ public class WeatherStation implements ObserverSubject
         Constructor of WheaterStation
         Assign an API Source to the WeatherData object
      */
-    public WeatherStation() throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
+    public WeatherStation(String city) throws JSONException, JAXBException, IOException, ParserConfigurationException, SAXException
     {
-        yahooApi = new YahooWeatherApi();
-        openWeatherApi = new OpenWeatherApi();
+        yahooApi = new YahooWeatherApi(city);
+        openWeatherApi = new OpenWeatherApi(city);
         observers = new ArrayList();
     }
 

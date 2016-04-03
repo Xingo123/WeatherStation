@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
@@ -64,6 +65,13 @@ public class MainController implements Initializable
 
     private WeatherStation weatherStation;
 
+    private String city;
+
+    public MainController()
+    {
+        this.city = "Coevorden";
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -77,7 +85,7 @@ public class MainController implements Initializable
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            e.printStackTrace();System.out.println("io");
         }
         catch (SAXException e)
         {
@@ -93,17 +101,35 @@ public class MainController implements Initializable
         }
         catch (NullPointerException e)
         {
+            try
+            {
+                openWeather();
+            }
+            catch (IOException e1)
+            {
+                e1.printStackTrace();
+            }
+            catch (ParserConfigurationException e1)
+            {
+                e1.printStackTrace();
+            }
+            catch (SAXException e1)
+            {
+                e1.printStackTrace();
+            }
+            catch (JAXBException e1)
+            {
+                e1.printStackTrace();
+            }
             System.out.println(e.getMessage());
         }
     }
 
-    public void showWeatherData(ActionEvent event) throws IOException, JSONException
+    public void showWeatherData(ActionEvent event) throws IOException, JSONException, JAXBException, SAXException, ParserConfigurationException
     {
-        JsonReader json = new JsonReader();
-        json.setCity(searchField.getText());
-        cityLabel.setText(searchField.getText());
-
-        System.out.println(searchField.getText());
+        this.city = searchField.getText();
+        System.out.println(city);
+        radioSelected(event);
     }
 
     public void radioSelected(ActionEvent event) throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException
@@ -111,18 +137,102 @@ public class MainController implements Initializable
         if (rb1.isSelected())
         {
             System.out.println("Radio Button 1");
-            openWeather();
+            try
+            {
+                openWeather();
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();System.out.println("io");
+            }
+            catch (SAXException e)
+            {
+                e.printStackTrace();
+            }
+            catch (JAXBException e)
+            {
+                e.printStackTrace();
+            }
+            catch (ParserConfigurationException e)
+            {
+                e.printStackTrace();
+            }
+            catch (NullPointerException e)
+            {
+                try
+                {
+                    openWeather();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (ParserConfigurationException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (SAXException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (JAXBException e1)
+                {
+                    e1.printStackTrace();
+                }
+                System.out.println(e.getMessage());
+            }
         }
         if (rb2.isSelected())
         {
             System.out.println("Radio Button 2");
-            yahooWeather();
+            try
+            {
+                yahooWeather();
+            }
+            catch (SAXException e)
+            {
+                e.printStackTrace();
+                System.out.println("sax");
+            }
+            catch (JAXBException e)
+            {
+                e.printStackTrace();System.out.println("jax");
+            }
+            catch (ParserConfigurationException e)
+            {
+                e.printStackTrace();
+                System.out.println("testP");
+            }
+            catch (NullPointerException e)
+            {
+                try
+                {
+                    yahooWeather();
+                }
+                catch (ParserConfigurationException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (SAXException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch (JAXBException e1)
+                {
+                    e1.printStackTrace();
+                }
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     public void openWeather() throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException
     {
-        weatherStation = new WeatherStation();
+        weatherStation = new WeatherStation(city);
         minTempLabel.setText(weatherStation.getOpenWeatherApi().getMinTemperature());
         maxTempLabel.setText(weatherStation.getOpenWeatherApi().getMaxTemperature());
         humidityLabel.setText(weatherStation.getOpenWeatherApi().getHumidity());
@@ -131,11 +241,13 @@ public class MainController implements Initializable
         descrLabel.setText(weatherStation.getOpenWeatherApi().getWeatherDescription());
         forecastLabel1.setText(weatherStation.getOpenWeatherApi().getForecast1());
         forecastLabel2.setText(weatherStation.getOpenWeatherApi().getForecast2());
+
+        System.out.println("open");
     }
 
     public void yahooWeather() throws IOException, JSONException, JAXBException, ParserConfigurationException, SAXException
     {
-        weatherStation = new WeatherStation();
+        weatherStation = new WeatherStation(city);
         minTempLabel.setText(weatherStation.getYahooApi().getMinTemperature());
         maxTempLabel.setText(weatherStation.getYahooApi().getMaxTemperature());
         humidityLabel.setText(weatherStation.getYahooApi().getHumidity());
@@ -144,5 +256,7 @@ public class MainController implements Initializable
         descrLabel.setText(weatherStation.getYahooApi().getWeatherDescription());
         forecastLabel1.setText(weatherStation.getYahooApi().getForecast1());
         forecastLabel2.setText(weatherStation.getYahooApi().getForecast2());
+
+        System.out.println("yahoo");
     }
 }

@@ -9,9 +9,12 @@ import java.io.IOException;
  */
 public class OpenWeatherApi extends WeatherData
 {
-    private JsonReader jsonReader = new JsonReader();
+    private JsonReader jsonReader;
 
-    public OpenWeatherApi() throws IOException, JSONException {}
+    public OpenWeatherApi(String city) throws IOException, JSONException
+    {
+        jsonReader  = new JsonReader(city);
+    }
 
     String getMaxTemperature() throws IOException, JSONException
     {

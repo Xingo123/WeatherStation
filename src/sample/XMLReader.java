@@ -24,25 +24,40 @@ public class XMLReader
     private Document doc;
     private NodeList nList;
     private Node nNode;
+    private String city;
 
 
-    public XMLReader() throws JAXBException, IOException, ParserConfigurationException, SAXException
+    public XMLReader(String city) throws JAXBException, IOException, ParserConfigurationException, SAXException
     {
+        this.city=city;
         dbFactory = DocumentBuilderFactory.newInstance();
         dBuilder = dbFactory.newDocumentBuilder();
-        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)&format=xml");
+        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22" + city + "%22)&format=xml");
+        System.out.println("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22" + city + "%22)&format=xml");
     }
 
     /**
      * Temperature
      */
-    public String getTemperature() throws IOException, JSONException
+    public String getMaxTemperature() throws IOException, JSONException
     {
-        nList = doc.getElementsByTagName("yweather:condition");
+        nList = doc.getElementsByTagName("yweather:forecast");
         nNode = nList.item(0);
         Element element = (Element) nNode;
 
-        return element.getAttribute("temp");
+        return getTemperatureInCelcius(Float.parseFloat(element.getAttribute("high")));
+    }
+
+    /**
+     * Temperature
+     */
+    public String getMinTemperature() throws IOException, JSONException
+    {
+        nList = doc.getElementsByTagName("yweather:forecast");
+        nNode = nList.item(0);
+        Element element = (Element) nNode;
+
+        return getTemperatureInCelcius(Float.parseFloat(element.getAttribute("low")));
     }
 
     /**
@@ -116,7 +131,7 @@ public class XMLReader
     // 2 seperate methods for 2 days each. 2 seperate labels
     public String getForecast1() throws IOException, JSONException
     {
-        String forecastString = null;
+        String forecastString = "";
         nList = doc.getElementsByTagName("yweather:forecast");
 
         for (int i = 1; i < 3; i++)
@@ -125,8 +140,8 @@ public class XMLReader
             Element element = (Element) nNode;
 
             forecastString += element.getAttribute("day") + " " + element.getAttribute("date") + "\n" +
-                    "Min: " + element.getAttribute("low") + "\n" +
-                    "Max: " + element.getAttribute("high") + "\n" +
+                    "Min: " + getTemperatureInCelcius(Float.parseFloat(element.getAttribute("low"))) + "\n" +
+                    "Max: " + getTemperatureInCelcius(Float.parseFloat(element.getAttribute("high"))) + "\n" +
                     element.getAttribute("text") + "\n\n";
         }
         return forecastString;
@@ -134,7 +149,7 @@ public class XMLReader
 
     public String getForecast2() throws IOException, JSONException
     {
-        String forecastString = null;
+        String forecastString = "";
         nList = doc.getElementsByTagName("yweather:forecast");
 
         for (int i = 3; i < 5; i++)
@@ -143,10 +158,21 @@ public class XMLReader
             Element element = (Element) nNode;
 
             forecastString += element.getAttribute("day") + " " + element.getAttribute("date") + "\n" +
-                    "Min: " + element.getAttribute("low") + "\n" +
-                    "Max: " + element.getAttribute("high") + "\n" +
+                    "Min: " + getTemperatureInCelcius(Float.parseFloat(element.getAttribute("low"))) + "\n" +
+                    "Max: " + getTemperatureInCelcius(Float.parseFloat(element.getAttribute("high"))) + "\n" +
                     element.getAttribute("text") + "\n\n";
         }
         return forecastString;
+    }
+
+    /*
+        Convert Fahrenheit temperature to Celcius
+     */
+    public String getTemperatureInCelcius(float temp)
+    {
+
+        temp = ((temp - 32) * 5) / 9;
+
+        return Float.toString(temp);
     }
 }
