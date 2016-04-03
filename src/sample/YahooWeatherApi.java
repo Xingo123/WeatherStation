@@ -52,8 +52,18 @@ public class YahooWeatherApi extends WeatherData
         return xmlReader.getDescription();
     }
 
-   String getCity() throws IOException, JSONException
-   {
-       return xmlReader.getCity();
-   }
+    String getCity() throws IOException, JSONException
+    {
+        return xmlReader.getCity();
+    }
+
+    String getForecast1() throws IOException, JSONException
+    {
+        return xmlReader.getForecast1();
+    }
+
+    String getForecast2() throws IOException, JSONException
+    {
+        return xmlReader.getForecast2();
+    }
 }

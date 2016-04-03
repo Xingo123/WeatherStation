@@ -20,4 +20,8 @@ abstract class WeatherData
     abstract String getWeatherDescription() throws IOException, JSONException;
 
     abstract String getCity() throws IOException, JSONException;
+
+    abstract String getForecast1() throws IOException, JSONException;
+
+    abstract String getForecast2() throws IOException, JSONException;
 }

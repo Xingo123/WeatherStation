@@ -1,6 +1,7 @@
 package sample;
 
 import net.aksingh.owmjapis.CurrentWeather;
+import net.aksingh.owmjapis.DailyForecast;
 import net.aksingh.owmjapis.OpenWeatherMap;
 
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import org.json.JSONException;
 
 import java.net.MalformedURLException;
+import java.text.DecimalFormat;
 
 /**
  * Created by Xing on 19-3-2016.
@@ -15,8 +17,12 @@ import java.net.MalformedURLException;
 public class JsonReader
 { // declaring object of "OpenWeatherMap" class
     private OpenWeatherMap owm = new OpenWeatherMap("0ff3dd96a6e1b885e7d66ec896b71860");
+    DailyForecast df = owm.dailyForecastByCityName("Coevorden, NL", Byte.parseByte("5"));
+
     // getting current weather data for the "Coevorden" city
     private String city = setCity("Coervorden");
+
+    public JsonReader() throws IOException, JSONException {}
 
     /*
         Getting maximum Temperature of the day
@@ -83,6 +89,51 @@ public class JsonReader
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
 
         return cwd.getCityName();
+    }
+
+    /** DONT DELETE
+    public String getForecast() throws IOException, JSONException
+    {
+        String forecastString = null;
+        for (int i = 1; i < df.getForecastCount(); i++)
+        {
+            DailyForecast.Forecast forecast = df.getForecastInstance(i);
+            forecastString += forecast.getDateTime() + "\n Min: \t\t" + getTemperatureInCelcius(forecast.getTemperatureInstance().getMinimumTemperature()) + "\n Max: \t\t" +
+                    getTemperatureInCelcius(forecast.getTemperatureInstance().getMaximumTemperature()) + "\n Humidity: \t" +
+                    forecast.getHumidity() + "\n Pressure: \t" +
+                    forecast.getPressure() + "\n\n";
+        }
+        return forecastString;
+    }
+     */
+
+    // 2 seperate methods for 2 days each. 2 seperate labels
+    public String getForecast1() throws IOException, JSONException
+    {
+        String forecastString = null;
+        for (int i = 1; i < 3; i++)
+        {
+            DailyForecast.Forecast forecast = df.getForecastInstance(i);
+            forecastString += forecast.getDateTime() + "\n Min: \t\t" + getTemperatureInCelcius(forecast.getTemperatureInstance().getMinimumTemperature()) + "\n Max: \t\t" +
+                             getTemperatureInCelcius(forecast.getTemperatureInstance().getMaximumTemperature()) + "\n Humidity: \t" +
+                             forecast.getHumidity() + "\n Pressure: \t" +
+                             forecast.getPressure() + "\n\n";
+        }
+        return forecastString;
+    }
+
+    public String getForecast2() throws IOException, JSONException
+    {
+        String forecastString = null;
+        for (int i = 3; i < 5; i++)
+        {
+            DailyForecast.Forecast forecast = df.getForecastInstance(i);
+            forecastString += forecast.getDateTime() + "\n Min: \t\t" + getTemperatureInCelcius(forecast.getTemperatureInstance().getMinimumTemperature()) + "\n Max: \t\t" +
+                    getTemperatureInCelcius(forecast.getTemperatureInstance().getMaximumTemperature()) + "\n Humidity: \t" +
+                    forecast.getHumidity() + "\n Pressure: \t" +
+                    forecast.getPressure() + "\n\n";
+        }
+        return forecastString;
     }
 
     public String setCity(String city)

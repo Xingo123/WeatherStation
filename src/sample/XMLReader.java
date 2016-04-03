@@ -30,7 +30,7 @@ public class XMLReader
     {
         dbFactory = DocumentBuilderFactory.newInstance();
         dBuilder = dbFactory.newDocumentBuilder();
-        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)");
+        doc = dBuilder.parse("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%22Coevorden%22)&format=xml");
     }
 
     /**
@@ -91,5 +91,62 @@ public class XMLReader
         Element element = (Element) nNode;
 
         return element.getTextContent();
+    }
+
+    /** DONT DELETE
+    public String getForecast() throws IOException, JSONException
+    {
+        String forecastString = null;
+        nList = doc.getElementsByTagName("yweather:forecast");
+
+        for (int i = 1; i < nList.getLength(); i++)
+        {
+            nNode = nList.item(i);
+            Element element = (Element) nNode;
+
+            forecastString += element.getAttribute("day") + " " + element.getAttribute("date") + "\n" +
+                    "Min: " + element.getAttribute("low") + "\n" +
+                    "Max: " + element.getAttribute("high") + "\n" +
+                    element.getAttribute("text") + "\n\n";
+        }
+        return forecastString;
+    }
+     */
+
+    // 2 seperate methods for 2 days each. 2 seperate labels
+    public String getForecast1() throws IOException, JSONException
+    {
+        String forecastString = null;
+        nList = doc.getElementsByTagName("yweather:forecast");
+
+        for (int i = 1; i < 3; i++)
+        {
+            nNode = nList.item(i);
+            Element element = (Element) nNode;
+
+            forecastString += element.getAttribute("day") + " " + element.getAttribute("date") + "\n" +
+                    "Min: " + element.getAttribute("low") + "\n" +
+                    "Max: " + element.getAttribute("high") + "\n" +
+                    element.getAttribute("text") + "\n\n";
+        }
+        return forecastString;
+    }
+
+    public String getForecast2() throws IOException, JSONException
+    {
+        String forecastString = null;
+        nList = doc.getElementsByTagName("yweather:forecast");
+
+        for (int i = 3; i < 5; i++)
+        {
+            nNode = nList.item(i);
+            Element element = (Element) nNode;
+
+            forecastString += element.getAttribute("day") + " " + element.getAttribute("date") + "\n" +
+                    "Min: " + element.getAttribute("low") + "\n" +
+                    "Max: " + element.getAttribute("high") + "\n" +
+                    element.getAttribute("text") + "\n\n";
+        }
+        return forecastString;
     }
 }

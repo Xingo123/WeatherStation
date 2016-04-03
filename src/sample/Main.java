@@ -18,7 +18,7 @@ public class Main extends Application
     {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Weather Station");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 500, 399));
         primaryStage.show();
 
         WeatherStation weatherStation = new WeatherStation();
@@ -30,6 +30,8 @@ public class Main extends Application
         weatherStation.getYahooApi().getWindInstance();
         weatherStation.getYahooApi().getWeatherDescription();
          */
+
+        //weatherStation.getYahooApi().getForecast();
 
         //weatherStation.getOpenWeatherApi().getMinTemperature();
         //weatherStation.getOpenWeatherApi().getMaxTemperature();
