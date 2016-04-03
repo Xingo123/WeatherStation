@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.json.JSONException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -63,11 +65,13 @@ public class MainController implements Initializable
     @FXML
     RadioButton rb2;
 
+    private ImageView imageViewer;
+
     private WeatherStation weatherStation;
 
     private String city;
 
-    public MainController()
+    public MainController() throws IOException, ParserConfigurationException, SAXException, JAXBException
     {
         this.city = "Coevorden";
     }
@@ -120,6 +124,10 @@ public class MainController implements Initializable
             catch (JAXBException e1)
             {
                 e1.printStackTrace();
+            }
+            catch (NullPointerException e1)
+            {
+                System.out.println(e1.getMessage());
             }
             System.out.println(e.getMessage());
         }
@@ -183,6 +191,10 @@ public class MainController implements Initializable
                 {
                     e1.printStackTrace();
                 }
+                catch (NullPointerException e1)
+                {
+                    System.out.println(e1.getMessage());
+                }
                 System.out.println(e.getMessage());
             }
         }
@@ -196,16 +208,14 @@ public class MainController implements Initializable
             catch (SAXException e)
             {
                 e.printStackTrace();
-                System.out.println("sax");
             }
             catch (JAXBException e)
             {
-                e.printStackTrace();System.out.println("jax");
+                e.printStackTrace();
             }
             catch (ParserConfigurationException e)
             {
                 e.printStackTrace();
-                System.out.println("testP");
             }
             catch (NullPointerException e)
             {
@@ -225,6 +235,10 @@ public class MainController implements Initializable
                 {
                     e1.printStackTrace();
                 }
+                catch (NullPointerException e1)
+                {
+                    System.out.println(e1.getMessage());
+                }
                 System.out.println(e.getMessage());
             }
         }
@@ -232,6 +246,7 @@ public class MainController implements Initializable
 
     public void openWeather() throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException
     {
+
         weatherStation = new WeatherStation(city);
         minTempLabel.setText(weatherStation.getOpenWeatherApi().getMinTemperature());
         maxTempLabel.setText(weatherStation.getOpenWeatherApi().getMaxTemperature());
@@ -242,11 +257,19 @@ public class MainController implements Initializable
         forecastLabel1.setText(weatherStation.getOpenWeatherApi().getForecast1());
         forecastLabel2.setText(weatherStation.getOpenWeatherApi().getForecast2());
 
+        Image img = null;
+        if (descrLabel.getText() == "Mist")
+        {
+            img = new Image("file:src/img/cloudy.gif");
+        }
+        imageViewer.setImage(img);
+
         System.out.println("open");
     }
 
     public void yahooWeather() throws IOException, JSONException, JAXBException, ParserConfigurationException, SAXException
     {
+
         weatherStation = new WeatherStation(city);
         minTempLabel.setText(weatherStation.getYahooApi().getMinTemperature());
         maxTempLabel.setText(weatherStation.getYahooApi().getMaxTemperature());
