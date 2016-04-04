@@ -5,7 +5,9 @@ import org.json.JSONException;
 import java.io.IOException;
 
 /**
- * Created by Xing on 19-3-2016.
+ * Created by Xing & Selami on 19-3-2016.
+ * An Abstract Factory class that controls all functions of the WeatherStation
+ *
  */
 public abstract class WeatherData
 {

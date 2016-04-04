@@ -36,7 +36,7 @@ public class XMLReader
     }
 
     /**
-     * Temperature
+     * Get string MaxTemperature
      */
     public String getMaxTemperature() throws IOException, JSONException
     {
@@ -48,7 +48,7 @@ public class XMLReader
     }
 
     /**
-     * Temperature
+     * Get string MinTemperature
      */
     public String getMinTemperature() throws IOException, JSONException
     {
@@ -128,6 +128,9 @@ public class XMLReader
      */
 
     // 2 seperate methods for 2 days each. 2 seperate labels
+    /*
+        Creating a forecastmethod that returns the third and the fouth day by XML call
+     */
     public String getForecast1() throws IOException, JSONException
     {
         String forecastString = "";
@@ -146,6 +149,9 @@ public class XMLReader
         return forecastString;
     }
 
+    /*
+        Creating a forecastmethod that returns the third and the fouth day by XML Call
+     */
     public String getForecast2() throws IOException, JSONException
     {
         String forecastString = "";

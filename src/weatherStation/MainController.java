@@ -28,6 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class MainController implements Initializable
 {
+    //Fields FXML
     @FXML
     Label minTempLabel;
 
@@ -64,6 +65,9 @@ public class MainController implements Initializable
     @FXML
     ImageView imageViewer;
 
+    //Fields MainController
+
+    //
     private WeatherStation weatherStation;
 
     private String city;
@@ -74,6 +78,10 @@ public class MainController implements Initializable
 
     private String weatherDescr;
 
+    /*
+        assign a standard city to the variable city
+        and create a new WeatherObserver object.
+     */
     public MainController() throws IOException, ParserConfigurationException, SAXException, JAXBException
     {
         this.city = "Coevorden";
@@ -88,6 +96,9 @@ public class MainController implements Initializable
         //weatherStation.registerObserver(weatherObserver);
     }
 
+    /*
+        Initialize the Weather with a call Standard call is openWeather
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -101,7 +112,7 @@ public class MainController implements Initializable
         }
         catch (IOException e)
         {
-            e.printStackTrace();System.out.println("io");
+            e.printStackTrace();
         }
         catch (SAXException e)
         {
@@ -149,18 +160,22 @@ public class MainController implements Initializable
         }
     }
 
+    /*
+        Function that triggers the inputfield and accessor the current city
+     */
     public void showWeatherData(ActionEvent event) throws IOException, JSONException, JAXBException, SAXException, ParserConfigurationException
     {
         this.city = searchField.getText();
-        System.out.println(city);
         radioSelected(event);
     }
 
+    /*
+        RadioSelected function that switches between the API's
+     */
     public void radioSelected(ActionEvent event) throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException
     {
         if (rb1.isSelected())
         {
-            System.out.println("Radio Button 1");
             try
             {
                 openWeather();
@@ -171,7 +186,7 @@ public class MainController implements Initializable
             }
             catch (IOException e)
             {
-                e.printStackTrace();System.out.println("io");
+                e.printStackTrace();
             }
             catch (SAXException e)
             {
@@ -216,7 +231,6 @@ public class MainController implements Initializable
         }
         if (rb2.isSelected())
         {
-            System.out.println("Radio Button 2");
             try
             {
                 yahooWeather();
@@ -260,12 +274,19 @@ public class MainController implements Initializable
         }
     }
 
+    /*
+        Call the OpenWeatherApi, assign with city variable that been filled from the inputfield
+        Assignen data to labels
+     */
     public void openWeather() throws IOException, JSONException, ParserConfigurationException, SAXException, JSONException, JAXBException
     {
 
         weatherStation = new WeatherStation(city);
         this.weatherDescr = weatherStation.getOpenWeatherApi().getWeatherDescription();
+
+        //assign the decoratorStation with the description from the WeatherObserver
         decoratorStation = new DecoratorStation(weatherObserver.update());
+
         minTempLabel.setText(weatherStation.getOpenWeatherApi().getMinTemperature());
         maxTempLabel.setText(weatherStation.getOpenWeatherApi().getMaxTemperature());
         humidityLabel.setText(weatherStation.getOpenWeatherApi().getHumidity());
@@ -275,20 +296,25 @@ public class MainController implements Initializable
         forecastLabel1.setText(weatherStation.getOpenWeatherApi().getForecast1());
         forecastLabel2.setText(weatherStation.getOpenWeatherApi().getForecast2());
 
+        //Create temp img variable, assign it with the image url path from the decorator class
         Image img = null;
         img = new Image(decoratorStation.getImageUrlOpen());
 
         imageViewer.setImage(img);
-
-
-        System.out.println("open");
     }
 
+    /*
+       Call the YahooWeatherApi, assign with city variable that been filled from the inputfield
+       Assignen data to labels
+    */
     public void yahooWeather() throws IOException, JSONException, JAXBException, ParserConfigurationException, SAXException
     {
         weatherStation = new WeatherStation(city);
         weatherDescr = weatherStation.getYahooApi().getWeatherDescription();
+
+        //assign the decoratorStation with the description from the WeatherObserver
         decoratorStation = new DecoratorStation(weatherObserver.update());
+
         minTempLabel.setText(weatherStation.getYahooApi().getMinTemperature());
         maxTempLabel.setText(weatherStation.getYahooApi().getMaxTemperature());
         humidityLabel.setText(weatherStation.getYahooApi().getHumidity());
@@ -298,11 +324,10 @@ public class MainController implements Initializable
         forecastLabel1.setText(weatherStation.getYahooApi().getForecast1());
         forecastLabel2.setText(weatherStation.getYahooApi().getForecast2());
 
+        //Create temp img variable, assign it with the image url path from the decorator class
         Image img = null;
         img = new Image(decoratorStation.getImageUrlYahoo());
 
         imageViewer.setImage(img);
-
-        System.out.println("yahoo");
     }
 }

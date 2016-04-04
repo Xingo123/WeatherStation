@@ -13,12 +13,16 @@ import org.json.JSONException;
  */
 public class JsonReader
 { // declaring object of "OpenWeatherMap" class
+    //Fields JsonReader
     private OpenWeatherMap owm = new OpenWeatherMap("0ff3dd96a6e1b885e7d66ec896b71860");
     private DailyForecast df;
 
     // getting current weather data for the "Coevorden" city
     private String city;
 
+    /*
+        Constructor JSon Reader
+     */
     public JsonReader(String city) throws IOException, JSONException
     {
         this.city = setCity(city);
@@ -85,6 +89,9 @@ public class JsonReader
         return cwd.getWeatherInstance(0).getWeatherName();
     }
 
+    /*
+        Get currentcity
+     */
     public String getCity() throws IOException, JSONException
     {
         CurrentWeather cwd = owm.currentWeatherByCityName(city);
@@ -108,6 +115,9 @@ public class JsonReader
     }
      */
 
+    /*
+        Creating a forecastmethod that returns the first two days bij JSON call
+     */
     // 2 seperate methods for 2 days each. 2 seperate labels
     public String getForecast1() throws IOException, JSONException
     {
@@ -123,6 +133,9 @@ public class JsonReader
         return forecastString;
     }
 
+    /*
+        Creating a forecastmethod that returns the third and the fouth day by JSON call
+     */
     public String getForecast2() throws IOException, JSONException
     {
         String forecastString = "";
@@ -137,6 +150,9 @@ public class JsonReader
         return forecastString;
     }
 
+    /*
+        Accessor city variable
+     */
     public String setCity(String city)
     {
         this.city = city;
